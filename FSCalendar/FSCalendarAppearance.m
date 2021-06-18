@@ -42,6 +42,8 @@
         _headerTitleOffset = CGPointZero;
         _headerTitleAlignment = NSTextAlignmentCenter;
         _weekdayTextColor = FSCalendarStandardTitleTextColor;
+        _sundayTextColor = FSCalendarStandardTitleTextColor;
+        _saturdayTextColor = FSCalendarStandardTitleTextColor;
         _caseOptions = FSCalendarCaseOptionsHeaderUsesDefaultCase|FSCalendarCaseOptionsWeekdayUsesDefaultCase;
         
         _backgroundColors = [NSMutableDictionary dictionaryWithCapacity:5];
@@ -403,6 +405,27 @@
         [self.calendar configureAppearance];
     }
 }
+
+- (void)setSundayTextColor:(UIColor *)sundayTextColor
+{
+    if (![_sundayTextColor isEqual:sundayTextColor]) {
+        _sundayTextColor = sundayTextColor;
+
+        _titleColors[@(FSCalendarCellStateSunday)] = sundayTextColor;
+    
+        [self.calendar configureAppearance];
+    }
+}
+
+- (void)setSaturdayTextColor:(UIColor *)saturdayTextColor
+{
+    if (![_saturdayTextColor isEqual:saturdayTextColor]) {
+        _saturdayTextColor = saturdayTextColor;
+        _titleColors[@(FSCalendarCellStateSaturday)] = saturdayTextColor;
+        [self.calendar configureAppearance];
+    }
+}
+
 
 - (void)setHeaderTitleColor:(UIColor *)color
 {

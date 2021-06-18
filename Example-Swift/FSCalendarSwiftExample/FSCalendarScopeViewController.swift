@@ -42,8 +42,9 @@ class FSCalendarScopeExampleViewController: UIViewController, UITableViewDataSou
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .week
-        
-        // For UITest
+        var calendar = NSCalendar.current
+        calendar.locale = Locale(identifier: "vi_GB")
+        self.calendar.locale = Locale(identifier: "vi_GB")
         self.calendar.accessibilityIdentifier = "calendar"
         
     }

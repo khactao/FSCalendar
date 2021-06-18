@@ -266,6 +266,14 @@
     if (self.placeholder && [[dictionary allKeys] containsObject:@(FSCalendarCellStatePlaceholder)]) {
         return dictionary[@(FSCalendarCellStatePlaceholder)];
     }
+    if (self.dateIsSaturday && [[dictionary allKeys] containsObject:@(FSCalendarCellStateSaturday)]) {
+        return dictionary[@(FSCalendarCellStateSaturday)];
+    }
+    
+    if (self.dateIsSunday && [[dictionary allKeys] containsObject:@(FSCalendarCellStateSunday)]) {
+        return dictionary[@(FSCalendarCellStateSunday)];
+    }
+    
     if (self.weekend && [[dictionary allKeys] containsObject:@(FSCalendarCellStateWeekend)]) {
         return dictionary[@(FSCalendarCellStateWeekend)];
     }

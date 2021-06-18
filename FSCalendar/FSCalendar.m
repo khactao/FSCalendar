@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     NSMutableArray  *_selectedDates;
 }
 
-@property (strong, nonatomic) NSCalendar *gregorian;
+
 @property (strong, nonatomic) NSDateFormatter *formatter;
 @property (strong, nonatomic) NSTimeZone *timeZone;
 
@@ -1386,6 +1386,8 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     cell.selected = [_selectedDates containsObject:date];
     cell.dateIsToday = self.today?[self.gregorian isDate:date inSameDayAsDate:self.today]:NO;
     cell.weekend = [self.gregorian isDateInWeekend:date];
+    cell.dateIsSunday = [self isSunday:date];
+    cell.dateIsSaturday = [self isSaturday:date];
     cell.monthPosition = [self.calculator monthPositionForIndexPath:indexPath];
     switch (self.transitionCoordinator.representingScope) {
         case FSCalendarScopeMonth: {
@@ -1409,6 +1411,29 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     }
     [self invalidateAppearanceForCell:cell forDate:date];
     [cell configureAppearance];
+}
+
+- (NSInteger)getWeekDay:(NSDate *)date {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en-US"]];
+    NSDateComponents* comp = [calendar components:NSCalendarUnitWeekday fromDate:date];
+    return [comp weekday]; // 1 = Sunday, 2 = Monday, etc.
+}
+
+- (BOOL)isSunday:(NSDate *)date {
+    if ([self getWeekDay:date] == 1) {
+        return true;
+    } else {
+        return  false;
+    }
+}
+
+- (BOOL)isSaturday:(NSDate *)date {
+    if ([self getWeekDay:date] == 7) {
+        return true;
+    } else {
+        return  false;
+    }
 }
 
 

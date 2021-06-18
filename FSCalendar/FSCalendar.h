@@ -402,6 +402,9 @@ IB_DESIGNABLE
  */
 @property (readonly, nonatomic) NSArray<NSDate *> *selectedDates;
 
+
+
+@property (strong, nonatomic) NSCalendar *gregorian;
 /**
  Reload the dates and appearance of the calendar.
  */
